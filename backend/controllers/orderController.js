@@ -119,11 +119,32 @@ exports.deleteOrder = async (req, res, next) => {
 
 }
 
+exports.totalOrders = async (req, res, next) => {
+    const totalOrders = await Order.aggregate([
+        {
+          $group: {
+             _id: null,
+             count: { $sum: 1 }
+          }
+        }
+     ])
+    if (!totalOrders) {
+        return next(new ErrorHandler('No Order found with this ID', 404))
+
+    }
+    res.status(200).json({
+        success: true,
+        totalOrders
+    })
+
+}
+
 async function updateStock(id, quantity) {
     const product = await Product.findById(id);
     product.stock = product.stock - quantity;
     await product.save({ validateBeforeSave: false })
 }
+
 
 
 

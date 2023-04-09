@@ -12,7 +12,8 @@ cloudinary.config({
 
 connectDatabase();
 console.log(process.env.DATABASE)
-
+if (process.env.NODE_ENV !== 'PRODUCTION') 
+	require('dotenv').config({ path: 'backend/config/.env' })
 app.listen(process.env.PORT, () => {
 	console.log(`server started on port:' ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
 });
