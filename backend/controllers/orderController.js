@@ -129,7 +129,7 @@ exports.totalOrders = async (req, res, next) => {
         }
      ])
     if (!totalOrders) {
-        return next(new ErrorHandler('No Order found with this ID', 404))
+        return next(new ErrorHandler('error total orders', 404))
 
     }
     res.status(200).json({
