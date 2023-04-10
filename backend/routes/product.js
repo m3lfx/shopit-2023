@@ -11,6 +11,7 @@ const { getProducts,
         getProductReviews,
         getAdminProducts,
         deleteReview,
+        productSales,
     } = require('../controllers/productController');
 
 const { isAuthenticatedUser,
@@ -28,4 +29,5 @@ router.get('/reviews',isAuthenticatedUser, getProductReviews);
 router.get('/admin/products', isAuthenticatedUser, authorizeRoles('admin'),getAdminProducts);
 router.post('/admin/product/new', isAuthenticatedUser, authorizeRoles('admin'), upload.array('images', 10),newProduct);
 router.delete('/reviews', isAuthenticatedUser, authorizeRoles('admin'), deleteReview)
+router.get('/admin/products/sales', productSales);
 module.exports = router;

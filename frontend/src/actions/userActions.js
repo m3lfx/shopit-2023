@@ -35,6 +35,9 @@ import {
     DELETE_USER_REQUEST,
     DELETE_USER_SUCCESS,
     DELETE_USER_FAIL,
+    USER_SALES_REQUEST,
+    USER_SALES_SUCCESS,
+    USER_SALES_FAIL,
     CLEAR_ERRORS
 } from '../constants/userConstants'
 
@@ -295,6 +298,28 @@ export const deleteUser = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const userSales = () => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        }
+        dispatch({ type: USER_SALES_REQUEST })
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/orders/customer-sales`,config)
+        dispatch({
+            type: USER_SALES_SUCCESS,
+            payload: data.customerSales,
+        })
+    } catch (error) {
+        dispatch({
+            type: USER_SALES_FAIL,
             payload: error.response.data.message
         })
     }

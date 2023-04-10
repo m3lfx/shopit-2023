@@ -2,11 +2,12 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware } f
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-   
-    import { productsReducer, productDetailsReducer, newReviewReducer, newProductReducer, productReducer, productReviewsReducer, reviewReducer } from './reducers/productReducers'
-import { authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer, } from './reducers/userReducers';
+
+import { productsReducer, productDetailsReducer, newReviewReducer, newProductReducer, productReducer, productReviewsReducer, reviewReducer } from './reducers/productReducers'
+import { authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer, customerSalesReducer, } from './reducers/userReducers';
 import { cartReducer } from './reducers/cartReducers'
 import { newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer,  } from './reducers/orderReducers'
+import { salesPerMonthReducer, productSalesReducer } from './reducers/chartReducers';
 const reducer = combineReducers({
     products: productsReducer,
     productDetails: productDetailsReducer,
@@ -17,7 +18,7 @@ const reducer = combineReducers({
     newOrder: newOrderReducer,
     myOrders: myOrdersReducer,
     orderDetails: orderDetailsReducer,
-    newReview: newReviewReducer, 
+    newReview: newReviewReducer,
     newProduct: newProductReducer,
     product: productReducer,
     allOrders: allOrdersReducer,
@@ -26,15 +27,18 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     productReviews: productReviewsReducer,
     review: reviewReducer,
+    customerSales: customerSalesReducer,
+    salesPerMonth: salesPerMonthReducer,
+    productSales: productSalesReducer,
 })
 
-let initialState = { 
+let initialState = {
     cart: {
         cartItems: localStorage.getItem('cartItems')
             ? JSON.parse(localStorage.getItem('cartItems'))
             : [],
         shippingInfo: localStorage.getItem('shippingInfo')
-             ? JSON.parse(localStorage.getItem('shippingInfo'))
+            ? JSON.parse(localStorage.getItem('shippingInfo'))
             : {}
     }
 }
